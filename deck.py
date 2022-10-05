@@ -51,5 +51,4 @@ a = Deck()
 
 a.shuffle()
 
-# print(a.draw_card(2))
 
