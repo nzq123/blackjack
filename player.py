@@ -48,12 +48,10 @@ class Dealer(Player):
         for card in self.player_hand:
             print(card)
         self.hand()
-        while self.score() < 17:
-            card = self.deck.draw_card(1)
-            self.player_hand.extend(card)
-            print(f'Dealer drawn {card[0]}')
-            self.hand()
-        return self.score()
+        if self.score() < 17:
+            return '1'
+        else:
+            return '2'
 
     def draw_card(self):
         return self.deck.draw_card(1)[0]

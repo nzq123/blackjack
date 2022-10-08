@@ -47,8 +47,4 @@ class Deck:
         return dealt_cards
 
 
-a = Deck()
-
-a.shuffle()
-
 

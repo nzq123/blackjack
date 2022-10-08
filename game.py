@@ -27,11 +27,9 @@ class Game:
             print(f'***** Round {rounds}: Player {player_points} points, Dealer {dealer_points} points *****')
             rounds += 1
             print(f'Dealers first card is {dealer.player_hand[0]}')
-            decision = player.decision()
-            if decision == '1':
-                player.get_card(dealer.draw_card())
+            self.ask_player(player)
             if self.has_blackjack(player) is False:
-                dealer.decision()
+                self.ask_player(dealer)
             else:
                 print('Player got blackjack!')
 
@@ -75,6 +73,14 @@ class Game:
             return True
         else:
             return False
+
+    def ask_player(self, player):
+        while player.score() < 21:
+            decision = player.decision()
+            if decision == '1':
+                player.get_card(self.dealer.draw_card())
+            else:
+                break
 
 
 
