@@ -4,22 +4,32 @@ from player import Player, Dealer
 
 class Game:
 
+    def __init__(self, dealer, player):
+        self.dealer = dealer
+        self.player = player
+
     def play(self):
 
         player_points = 0
         dealer_points = 0
         rounds = 1
 
-        while player_points <= 3 or dealer_points <= 3:
+        dealer = self.dealer
+        player = self.player
 
-            deck = Deck()
-            dealer = Dealer(deck.draw_card(2), deck)
-            player = Player(deck.draw_card(2), deck)
+        while player_points < 3 and dealer_points < 3:
+
+            dealer.get_card(dealer.draw_card())
+            dealer.get_card(dealer.draw_card())
+            player.get_card(dealer.draw_card())
+            player.get_card(dealer.draw_card())
 
             print(f'***** Round {rounds}: Player {player_points} points, Dealer {dealer_points} points *****')
             rounds += 1
             print(f'Dealers first card is {dealer.player_hand[0]}')
-            player.decision()
+            decision = player.decision()
+            if decision == '1':
+                player.get_card(dealer.draw_card())
             if self.has_blackjack(player) is False:
                 dealer.decision()
             else:
@@ -56,6 +66,9 @@ class Game:
             elif dealer_score > 21:
                 print(f'Player wins with {player_score} points!')
                 player_points += 1
+
+            player.discard_hand()
+            dealer.discard_hand()
 
     def has_blackjack(self, player):
         if player.score() == 21 and len(player.player_hand) == 2:
