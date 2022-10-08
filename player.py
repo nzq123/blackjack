@@ -23,7 +23,7 @@ class Player:
                 break
         return self.score()
 
-    def count(self):
+    def score(self):
         res = 0
         ace = False
         for card in self.player_hand:
@@ -35,17 +35,8 @@ class Player:
         return res
 
     def hand(self):
-        num = self.count()
+        num = self.score()
         print(f"Score is {num} ")
-
-    def score(self):
-        return self.count()
-
-    def get_blackjack(self):
-        if self.score() == 21 and len(self.player_hand) == 2:
-            return True
-        else:
-            return False
 
 
 class Dealer(Player):
