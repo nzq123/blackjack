@@ -25,10 +25,13 @@ class Player:
 
     def count(self):
         res = 0
+        ace = False
         for card in self.player_hand:
-            if card.rank == 'A' and res + card.value > 21:
-                card.value = 1
+            if card.rank == 'A':
+                ace = True
             res += card.value
+        if ace is True and res > 21:
+            res -= 10
         return res
 
     def hand(self):
